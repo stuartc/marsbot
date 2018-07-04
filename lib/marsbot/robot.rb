@@ -10,5 +10,15 @@ class Marsbot
       @direction = direction
       @instructions = instructions
     end
+
+    def validate
+      instructions_valid?
+    end
+
+    private
+
+    def instructions_valid?
+      instructions.is_a?(Array) && instructions.all? { |i| %w(L R F).include?(i) }
+    end
   end
 end
