@@ -2,13 +2,13 @@
 
 class Marsbot
   class Parser
-    Result = Struct.new(:extents, :robots) 
+    Result = Struct.new(:plane, :robots) 
 
     class << self
       def parse(input)
         lines = input.split("\n")
 
-        extents = lines[0].split(' ').map(&:to_i)
+        plane = to_plane(lines[0].split(' ').map(&:to_i))
 
         robot_lines = lines[1..-1].reject(&:empty?)
 
@@ -19,14 +19,14 @@ class Marsbot
 
         robots = starting_positions.zip(instructions).map(&method(:to_robot))
 
-        Result.new(extents, robots)
+        Result.new(plane, robots)
       end
 
       private
 
       def to_robot(details)
         x, y, direction = details[0].split(' ')
-        instructions = details[1].split('')
+        instructions = details[1].chars
 
         Robot.new(
           x: x.to_i,
@@ -34,6 +34,10 @@ class Marsbot
           direction: direction,
           instructions: instructions
         )
+      end
+
+      def to_plane((x, y))
+        Plane.new(x: x.to_i, y: y.to_i)
       end
     end
   end

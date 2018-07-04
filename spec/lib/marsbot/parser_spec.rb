@@ -20,19 +20,21 @@ describe Marsbot::Parser do
     subject { described_class.parse(input) }
     it do
       is_expected.to have_attributes(
-        extents: [5,3],
+        plane: instance_of(Marsbot::Plane) && have_attributes(
+          x: 5, y: 3
+        ),
         robots: contain_exactly(
           instance_of(Marsbot::Robot) && have_attributes(
             x: 1, y: 1, direction: "E",
-            instructions: "RFRFRFRF".split('')
+            instructions: "RFRFRFRF".chars
           ),
           instance_of(Marsbot::Robot) && have_attributes(
             x: 3, y: 2, direction: "N",
-            instructions: "FRRFLLFFRRFLL".split('')
+            instructions: "FRRFLLFFRRFLL".chars
           ),
           instance_of(Marsbot::Robot) && have_attributes(
             x: 0, y: 3, direction: "W",
-            instructions: "LLFFFLFLFL".split('')
+            instructions: "LLFFFLFLFL".chars
           )
         )
       )
