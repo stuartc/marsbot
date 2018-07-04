@@ -12,13 +12,17 @@ class Marsbot
     end
 
     def validate
-      instructions_valid?
+      instructions_valid? && direction_valid?
     end
 
     private
 
     def instructions_valid?
       instructions.is_a?(Array) && instructions.all? { |i| %w(L R F).include?(i) }
+    end
+
+    def direction_valid?
+      direction.is_a?(String) && %w(N S E W).include?(direction)
     end
   end
 end

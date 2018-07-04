@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Marsbot::Robot do
 
   describe "#validate" do
-    let(:defaults) { { x: 1, y: 2, direction: "N", instructions: "LLFFFLFLFL" } }
+    let(:defaults) { { x: 1, y: 2, direction: "N", instructions: "LLFFFLFLFL".chars } }
 
     context "instructions can't be F O O" do
       subject { described_class.new({**defaults, instructions: %w(F O O)}).validate }
@@ -17,6 +17,25 @@ describe Marsbot::Robot do
       it { is_expected.to eql true }
     end
     
+    %w(N S E W).each do |direction|
+      context "direction" do
+        subject { described_class.new({**defaults, direction: direction}).validate }
+
+        it "can be #{direction}" do
+          is_expected.to eql true
+        end
+      end
+    end
+
+    %w(A O D).each do |direction|
+      context "direction" do
+        subject { described_class.new({**defaults, direction: direction}).validate }
+
+        it "can't be #{direction}" do
+          is_expected.to eql false
+        end
+      end
+    end
   end
 end
 
