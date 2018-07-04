@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 $LOAD_PATH.unshift File.expand_path("#{File.dirname(__FILE__)}/../lib")
-require "marsbot"
+require 'marsbot'
 
 input =
   if STDIN.tty?
@@ -13,7 +13,7 @@ input =
       puts("File doesn't exist")
       exit(1)
     rescue TypeError
-      puts("No file name provided")
+      puts('No file name provided')
       exit(1)
     end
   else
@@ -23,9 +23,9 @@ input =
 begin
   puts Marsbot::Parser.parse(input).inspect
 rescue ArgumentError
-  puts "An error occurred while parsing"
+  puts 'An error occurred while parsing'
   exit(2)
 rescue Exception
-  puts "An error occurred"
+  puts 'An error occurred'
   exit(10)
 end
