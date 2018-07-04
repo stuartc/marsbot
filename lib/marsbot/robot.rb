@@ -12,7 +12,7 @@ class Marsbot
     end
 
     def validate
-      instructions_valid? && direction_valid?
+      instructions_valid? && direction_valid? && coordinates_valid?
     end
 
     private
@@ -23,6 +23,10 @@ class Marsbot
 
     def direction_valid?
       direction.is_a?(String) && %w(N S E W).include?(direction)
+    end
+
+    def coordinates_valid?
+      x.is_a?(Integer) && y.is_a?(Integer)
     end
   end
 end
