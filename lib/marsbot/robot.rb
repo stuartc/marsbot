@@ -2,27 +2,27 @@
 
 class Marsbot
   class Robot
-    attr_reader :x, :y, :direction, :instructions
+    attr_accessor :x, :y, :orientation, :instructions
 
-    def initialize(x:, y:, direction:, instructions:)
+    def initialize(x:, y:, orientation:, instructions:)
       @x = x
       @y = y
-      @direction = direction
+      @orientation = orientation
       @instructions = instructions
     end
 
     def validate
-      instructions_valid? && direction_valid? && coordinates_valid?
+      instructions_valid? && orientation_valid? && coordinates_valid?
     end
 
     private
 
     def instructions_valid?
-      instructions.is_a?(Array) && instructions.all? { |i| %w(L R F).include?(i) }
+      instructions.is_a?(Array) && instructions.all? { |i| %w[L R F].include?(i) }
     end
 
-    def direction_valid?
-      direction.is_a?(String) && %w(N S E W).include?(direction)
+    def orientation_valid?
+      orientation.is_a?(String) && %w[N S E W].include?(orientation)
     end
 
     def coordinates_valid?

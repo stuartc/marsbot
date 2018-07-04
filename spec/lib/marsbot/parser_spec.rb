@@ -25,15 +25,15 @@ describe Marsbot::Parser do
         ),
         robots: contain_exactly(
           instance_of(Marsbot::Robot) && have_attributes(
-            x: 1, y: 1, direction: "E",
+            x: 1, y: 1, orientation: "E",
             instructions: "RFRFRFRF".chars
           ),
           instance_of(Marsbot::Robot) && have_attributes(
-            x: 3, y: 2, direction: "N",
+            x: 3, y: 2, orientation: "N",
             instructions: "FRRFLLFFRRFLL".chars
           ),
           instance_of(Marsbot::Robot) && have_attributes(
-            x: 0, y: 3, direction: "W",
+            x: 0, y: 3, orientation: "W",
             instructions: "LLFFFLFLFL".chars
           )
         )

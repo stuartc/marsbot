@@ -20,4 +20,3 @@ class Marsbot
     end
   end
 end
-

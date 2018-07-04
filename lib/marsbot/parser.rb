@@ -2,7 +2,7 @@
 
 class Marsbot
   class Parser
-    Result = Struct.new(:plane, :robots) 
+    Result = Struct.new(:plane, :robots)
 
     class << self
       def parse(input)
@@ -13,9 +13,9 @@ class Marsbot
         robot_lines = lines[1..-1].reject(&:empty?)
 
         starting_positions =
-          robot_lines.select.with_index { |l,i| i.even? }
+          robot_lines.select.with_index { |_l, i| i.even? }
         instructions =
-          robot_lines.select.with_index { |l,i| i.odd? }
+          robot_lines.select.with_index { |_l, i| i.odd? }
 
         robots = starting_positions.zip(instructions).map(&method(:to_robot))
 
@@ -25,13 +25,13 @@ class Marsbot
       private
 
       def to_robot(details)
-        x, y, direction = details[0].split(' ')
+        x, y, orientation = details[0].split(' ')
         instructions = details[1].chars
 
         Robot.new(
           x: x.to_i,
           y: y.to_i,
-          direction: direction,
+          orientation: orientation,
           instructions: instructions
         )
       end
