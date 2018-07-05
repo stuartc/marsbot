@@ -33,6 +33,11 @@ class Marsbot
       [x, y]
     end
 
+    def coordinates=(coords)
+      self.x = coords[0]
+      self.y = coords[1]
+    end
+
     def turn_left
       cardinal_index = CARDINAL_POINTS.index { |p| p == orientation }
       self.orientation = CARDINAL_POINTS[cardinal_index - 1]

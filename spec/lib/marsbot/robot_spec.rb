@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Marsbot::Robot do
-  let(:defaults) { { x: 1, y: 2, orientation: 'N', instructions: 'LLFFFLFLFL'.chars } }
+  let(:defaults) do
+    { x: 1, y: 2, orientation: 'N', instructions: 'LLFFFLFLFL'.chars }
+  end
   describe '#validate' do
     context "instructions can't be F O O" do
       subject { described_class.new(**defaults, instructions: %w[F O O]).validate }

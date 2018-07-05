@@ -2,7 +2,7 @@
 
 class Marsbot
   class World
-    attr_reader :plane, :robots, :states
+    attr_reader :plane, :robots
 
     def initialize(plane:)
       @plane = plane
@@ -26,6 +26,10 @@ class Marsbot
       end
     end
 
-    def out_of_bounds; end
+    def out_of_bounds
+      robots.reject do |robot|
+        robot.x.between?(0, plane.x) && robot.y.between?(0, plane.y)
+      end
+    end
   end
 end
