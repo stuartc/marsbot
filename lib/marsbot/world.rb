@@ -6,31 +6,26 @@ class Marsbot
 
     def initialize(plane:)
       @plane = plane
-      @states = []
+      @robots = []
     end
 
     def <<(robot)
-      @states << process(robot)
+      @robots << process(robot)
     end
 
     def process(robot)
-      robot.instructions.each_with_object(robot) do |instruction, state|
+      robot.instructions.each_with_object(robot) do |instruction, r|
         case instruction
         when 'F'
-          case state.orientation
-          when 'N'
-            state.x += 1
-          when 'S'
-            state.x += -1
-          when 'E'
-            state.y += 1
-          when 'W'
-            state.y += -1
-          end
+          r.forward
         when 'L'
+          r.turn_left
         when 'R'
+          r.turn_right
         end
       end
     end
+
+    def out_of_bounds; end
   end
 end

@@ -9,7 +9,7 @@ describe Marsbot::World do
     before { world << robot }
 
     it do
-      expect(world.states).to contain_exactly(
+      expect(world.robots).to contain_exactly(
         have_attributes(x: 3, y: 2, orientation: 'N')
       )
     end

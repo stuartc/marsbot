@@ -2,6 +2,7 @@
 
 class Marsbot
   class Robot
+    CARDINAL_POINTS = %w[N E S W].freeze
     attr_accessor :x, :y, :orientation, :instructions
 
     def initialize(x:, y:, orientation:, instructions:)
@@ -15,14 +16,42 @@ class Marsbot
       instructions_valid? && orientation_valid? && coordinates_valid?
     end
 
+    def forward
+      case orientation
+      when 'N'
+        self.x += 1
+      when 'S'
+        self.x += -1
+      when 'E'
+        self.y += 1
+      when 'W'
+        self.y += -1
+      end
+    end
+
+    def coordinates
+      [x, y]
+    end
+
+    def turn_left
+      cardinal_index = CARDINAL_POINTS.index { |p| p == orientation }
+      self.orientation = CARDINAL_POINTS[cardinal_index - 1]
+    end
+
+    def turn_right
+      cardinal_index = CARDINAL_POINTS.reverse.index { |p| p == orientation }
+      self.orientation = CARDINAL_POINTS.reverse[cardinal_index - 1]
+    end
+
     private
 
     def instructions_valid?
-      instructions.is_a?(Array) && instructions.all? { |i| %w[L R F].include?(i) }
+      instructions.is_a?(Array) &&
+        instructions.all? { |i| %w[L R F].include?(i) }
     end
 
     def orientation_valid?
-      orientation.is_a?(String) && %w[N S E W].include?(orientation)
+      orientation.is_a?(String) && CARDINAL_POINTS.include?(orientation)
     end
 
     def coordinates_valid?
