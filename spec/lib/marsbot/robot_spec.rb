@@ -46,22 +46,22 @@ describe Marsbot::Robot do
     subject { robot.coordinates }
     context 'north facing' do
       let(:orientation) { 'N' }
-      it { is_expected.to eql [2, 2] }
+      it { is_expected.to eql [1, 3] }
     end
 
     context 'south facing' do
       let(:orientation) { 'S' }
-      it { is_expected.to eql [0, 2] }
+      it { is_expected.to eql [1, 1] }
     end
 
     context 'east facing' do
       let(:orientation) { 'E' }
-      it { is_expected.to eql [1, 3] }
+      it { is_expected.to eql [2, 2] }
     end
 
     context 'west facing' do
       let(:orientation) { 'W' }
-      it { is_expected.to eql [1, 1] }
+      it { is_expected.to eql [0, 2] }
     end
   end
 

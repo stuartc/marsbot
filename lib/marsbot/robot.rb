@@ -12,20 +12,16 @@ class Marsbot
       @instructions = instructions
     end
 
-    def validate
-      instructions_valid? && orientation_valid? && coordinates_valid?
-    end
-
     def forward
       case orientation
       when 'N'
-        self.x += 1
-      when 'S'
-        self.x += -1
-      when 'E'
         self.y += 1
-      when 'W'
+      when 'S'
         self.y += -1
+      when 'E'
+        self.x += 1
+      when 'W'
+        self.x += -1
       end
     end
 
@@ -46,6 +42,10 @@ class Marsbot
     def turn_right
       cardinal_index = CARDINAL_POINTS.reverse.index { |p| p == orientation }
       self.orientation = CARDINAL_POINTS.reverse[cardinal_index - 1]
+    end
+
+    def validate
+      instructions_valid? && orientation_valid? && coordinates_valid?
     end
 
     private

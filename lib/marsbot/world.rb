@@ -2,11 +2,12 @@
 
 class Marsbot
   class World
-    attr_reader :plane, :robots
+    attr_reader :plane, :robots, :tracker
 
     def initialize(plane:)
       @plane = plane
       @robots = []
+      @tracker = Tracker.new(plane: plane)
     end
 
     def <<(robot)
@@ -14,22 +15,7 @@ class Marsbot
     end
 
     def process(robot)
-      robot.instructions.each_with_object(robot) do |instruction, r|
-        case instruction
-        when 'F'
-          r.forward
-        when 'L'
-          r.turn_left
-        when 'R'
-          r.turn_right
-        end
-      end
-    end
-
-    def out_of_bounds
-      robots.reject do |robot|
-        robot.x.between?(0, plane.x) && robot.y.between?(0, plane.y)
-      end
+      tracker.process(robot)
     end
   end
 end
